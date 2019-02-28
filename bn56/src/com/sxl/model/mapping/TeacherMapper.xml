@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sxl.dao.TeacherDao">
+	<resultMap id="BaseResultMap" type="com.sxl.model.Teacher">
+		<id column="username" property="username"/>
+		<id column="password" property="password"/>
+		<id column="teacherName" property="teacherName"/>
+		<id column="age" property="age"/>
+		<id column="sex" property="sex"/>
+		<id column="phone" property="phone"/>
+		<id column="pic" property="pic"/>
+	</resultMap>
+	
+	<insert id="insert">
+		insert into t_teacher(username,password,teacherName,age,sex,phone,pic) values(#{username},#{password},#{teacherName},#{age},#{sex},#{phone},#{pic})
+	</insert>
+	
+	<update id="update">
+	 update t_teacher
+	 <trim prefix="set" suffixOverrides=",">
+	  <if test="username!=null">username=#{username},</if>
+	  <if test="password!=null">password=#{password},</if>
+	  <if test="teacherName!=null">teacherName=#{teacherName},</if>
+	  <if test="age!=null">age=#{age},</if>
+	  <if test="sex!=null">sex=#{sex},</if>
+	  <if test="phone!=null">phone=#{phone},</if>
+	  <if test="pic!=null">pic=#{pic},</if>
+	 </trim>
+	 where id=#{id}
+	</update>
+	<select id="getById" resultMap="BaseResultMap"
+		parameterType="com.sxl.model.Teacher">
+		select * from t_teacher where id=#{id}
+	</select>
+	
+	<delete id="delete">  
+        delete from t_teacher where id=#{id}
+	</delete>
+	<select id="queryForList" resultMap="BaseResultMap"
+		parameterType="com.sxl.model.Teacher">
+		select * from t_teacher where 1=1 
+	</select>
+</mapper>

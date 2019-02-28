@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sxl.dao.BjDao">
+	<resultMap id="BaseResultMap" type="com.sxl.model.Bj">
+		<id column="bjName" property="bjName"/>
+	</resultMap>
+	
+	<insert id="insert">
+		insert into t_bj(bjName) values(#{bjName})
+	</insert>
+	
+	<update id="update">
+	 update t_bj
+	 <trim prefix="set" suffixOverrides=",">
+	  <if test="bjName!=null">bjName=#{bjName},</if>
+	 </trim>
+	 where id=#{id}
+	</update>
+	<select id="getById" resultMap="BaseResultMap"
+		parameterType="com.sxl.model.Bj">
+		select * from t_bj where id=#{id}
+	</select>
+	
+	<delete id="delete">  
+        delete from t_bj where id=#{id}
+	</delete>
+	<select id="queryForList" resultMap="BaseResultMap"
+		parameterType="com.sxl.model.Bj">
+		select * from t_bj where 1=1 
+	</select>
+</mapper>

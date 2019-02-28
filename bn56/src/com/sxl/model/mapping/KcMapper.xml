@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sxl.dao.KcDao">
+	<resultMap id="BaseResultMap" type="com.sxl.model.Kc">
+		<id column="kcName" property="kcName"/>
+		<id column="ls" property="ls"/>
+	</resultMap>
+	
+	<insert id="insert">
+		insert into t_kc(kcName,ls) values(#{kcName},#{ls})
+	</insert>
+	
+	<update id="update">
+	 update t_kc
+	 <trim prefix="set" suffixOverrides=",">
+	  <if test="kcName!=null">kcName=#{kcName},</if>
+	  <if test="ls!=null">ls=#{ls},</if>
+	 </trim>
+	 where id=#{id}
+	</update>
+	<select id="getById" resultMap="BaseResultMap"
+		parameterType="com.sxl.model.Kc">
+		select * from t_kc where id=#{id}
+	</select>
+	
+	<delete id="delete">  
+        delete from t_kc where id=#{id}
+	</delete>
+	<select id="queryForList" resultMap="BaseResultMap"
+		parameterType="com.sxl.model.Kc">
+		select * from t_kc where 1=1 
+	</select>
+</mapper>

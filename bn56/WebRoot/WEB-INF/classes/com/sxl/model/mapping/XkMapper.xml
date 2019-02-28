@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sxl.dao.XkDao">
+	<resultMap id="BaseResultMap" type="com.sxl.model.Xk">
+		<id column="ckId" property="ckId"/>
+		<id column="studnetId" property="studnetId"/>
+		<id column="cj" property="cj"/>
+		<id column="status" property="status"/>
+	</resultMap>
+	
+	<insert id="insert">
+		insert into t_xk(ckId,studnetId,cj,status) values(#{ckId},#{studnetId},#{cj},#{status})
+	</insert>
+	
+	<update id="update">
+	 update t_xk
+	 <trim prefix="set" suffixOverrides=",">
+	  <if test="ckId!=null">ckId=#{ckId},</if>
+	  <if test="studnetId!=null">studnetId=#{studnetId},</if>
+	  <if test="cj!=null">cj=#{cj},</if>
+	  <if test="status!=null">status=#{status},</if>
+	 </trim>
+	 where id=#{id}
+	</update>
+	<select id="getById" resultMap="BaseResultMap"
+		parameterType="com.sxl.model.Xk">
+		select * from t_xk where id=#{id}
+	</select>
+	
+	<delete id="delete">  
+        delete from t_xk where id=#{id}
+	</delete>
+	<select id="queryForList" resultMap="BaseResultMap"
+		parameterType="com.sxl.model.Xk">
+		select * from t_xk where 1=1 
+	</select>
+</mapper>

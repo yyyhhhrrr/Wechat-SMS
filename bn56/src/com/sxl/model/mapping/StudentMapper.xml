@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sxl.dao.StudentDao">
+	<resultMap id="BaseResultMap" type="com.sxl.model.Student">
+		<id column="username" property="username"/>
+		<id column="password" property="password"/>
+		<id column="studentName" property="studentName"/>
+		<id column="bjId" property="bjId"/>
+		<id column="age" property="age"/>
+		<id column="sex" property="sex"/>
+		<id column="phone" property="phone"/>
+		<id column="qq" property="qq"/>
+		<id column="email" property="email"/>
+		<id column="pic" property="pic"/>
+	</resultMap>
+	
+	<insert id="insert">
+		insert into t_student(username,password,studentName,bjId,age,sex,phone,qq,email,pic) values(#{username},#{password},#{studentName},#{bjId},#{age},#{sex},#{phone},#{qq},#{email},#{pic})
+	</insert>
+	
+	<update id="update">
+	 update t_student
+	 <trim prefix="set" suffixOverrides=",">
+	  <if test="username!=null">username=#{username},</if>
+	  <if test="password!=null">password=#{password},</if>
+	  <if test="studentName!=null">studentName=#{studentName},</if>
+	  <if test="bjId!=null">bjId=#{bjId},</if>
+	  <if test="age!=null">age=#{age},</if>
+	  <if test="sex!=null">sex=#{sex},</if>
+	  <if test="phone!=null">phone=#{phone},</if>
+	  <if test="qq!=null">qq=#{qq},</if>
+	  <if test="email!=null">email=#{email},</if>
+	  <if test="pic!=null">pic=#{pic},</if>
+	 </trim>
+	 where id=#{id}
+	</update>
+	<select id="getById" resultMap="BaseResultMap"
+		parameterType="com.sxl.model.Student">
+		select * from t_student where id=#{id}
+	</select>
+	
+	<delete id="delete">  
+        delete from t_student where id=#{id}
+	</delete>
+	<select id="queryForList" resultMap="BaseResultMap"
+		parameterType="com.sxl.model.Student">
+		select * from t_student where 1=1 
+	</select>
+</mapper>

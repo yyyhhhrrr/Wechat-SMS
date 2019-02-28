@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sxl.dao.Book2Dao">
+	<resultMap id="BaseResultMap" type="com.sxl.model.Book2">
+		<id column="id" property="id"/>
+		<result column="bookName" property="bookName"/>
+		<result column="price" property="price"/>
+		<result column="num" property="num"/>
+		<result column="allfee" property="allfee"/>
+		<result column="VALSS" property="VALSS"/>
+		<result column="insertDate" property="insertDate"/>
+	</resultMap>
+	
+	<insert id="insert">
+		insert into t_book(bookname,insertDate,price,num,allfee,valss) values(#{bookName},#{insertDate},#{price},#{num},#{allfee},#{VALSS})
+	</insert>
+	
+	<select id="getById" resultMap="BaseResultMap"
+		parameterType="com.sxl.model.Book2">
+		select * from t_book where id=#{id}
+	</select>
+	
+	<delete id="delete">  
+        delete from t_book2 where id=#{id}
+	</delete>
+	<select id="queryForList" resultMap="BaseResultMap"
+		parameterType="com.sxl.model.Book2">
+		select * from t_book where 1=1 
+		<if test="bookName!=null">
+		    and bookName like concat(concat('%',#{bookName}),'%') 
+		</if>
+	</select>
+	
+	
+</mapper>
